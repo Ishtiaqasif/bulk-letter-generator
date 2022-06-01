@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PdfService } from 'src/app/services/pdf.service';
 import { XlsxService } from 'src/app/services/xlsx.service';
-import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-beginner',
@@ -10,9 +9,13 @@ import * as XLSX from 'xlsx';
 })
 export class BeginnerComponent {
   data: any[];
-  
-  constructor(private xlsxService: XlsxService, private pdfService: PdfService) { 
+  text: string;
+  constructor(
+    private xlsxService: XlsxService,
+    private pdfService: PdfService
+  ) {
     this.data = [];
+    this.text = '';
   }
 
   readFile(event: Event): void {
@@ -20,7 +23,7 @@ export class BeginnerComponent {
       let input = event.target as HTMLInputElement;
       if (input.files && input.files[0]) {
         let file: File = input.files[0];
-        
+
         this.xlsxService.parseFile(file).then((list: any) => {
           this.data = list;
         });
@@ -29,6 +32,19 @@ export class BeginnerComponent {
   }
 
   generateLatter(): void {
-    this.pdfService.generatePDF();
+    console.log(this.data);
+
+    this.data.length = 3;
+
+    this.data.forEach((item: any) => {
+      let text = this.text;
+      Object.keys(item).forEach((key: string) => {
+        text = text.replace(`[${key}]`, item[key]);
+      });
+
+      this.pdfService.generatePDF(text);
+    });
   }
+
+  
 }

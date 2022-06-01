@@ -11,12 +11,7 @@ export class PdfService {
 
   constructor() { }
   
-  generatePDF() {  
-    let docDefinition = {  
-      header: 'C#Corner PDF Header',  
-      content: 'Sample PDF generated with Angular and PDFMake for C#Corner Blog'  
-    };  
-   
-    pdfMake.createPdf(docDefinition).open();  
+  generatePDF(text: string) {  
+    pdfMake.createPdf({content: text}).open();  
   }  
 }
