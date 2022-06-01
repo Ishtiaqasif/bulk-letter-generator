@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { XlsxService } from 'src/app/services/xlsx.service';
 import * as XLSX from 'xlsx';
 
 @Component({
@@ -6,31 +7,19 @@ import * as XLSX from 'xlsx';
   templateUrl: './beginner.component.html',
   styleUrls: ['./beginner.component.scss'],
 })
-export class BeginnerComponent implements OnInit {
-  file: any;
-  arrayBuffer: any;
-  fileList: any;
-  constructor() {}
+export class BeginnerComponent {
+  constructor(private xlsxService: XlsxService) {}
 
-  ngOnInit(): void {}
-  addFile(event: any) {
-    this.file = event.target.files[0];
-    let fileReader = new FileReader();
-    fileReader.readAsArrayBuffer(this.file);
-    fileReader.onload = (e) => {
-      this.arrayBuffer = fileReader.result;
-      var data = new Uint8Array(this.arrayBuffer);
-      var arr = new Array();
-      for (var i = 0; i != data.length; ++i)
-        arr[i] = String.fromCharCode(data[i]);
-      var bstr = arr.join('');
-      var workbook = XLSX.read(bstr, { type: 'binary' });
-      var first_sheet_name = workbook.SheetNames[0];
-      var worksheet = workbook.Sheets[first_sheet_name];
-      console.log(XLSX.utils.sheet_to_json(worksheet, { raw: true }));
-      var arraylist = XLSX.utils.sheet_to_json(worksheet, { raw: true });
-      this.fileList = [];
-      console.log(this.fileList);
-    };
+  readFile(event: Event): void {
+    if (event.target) {
+      let input = event.target as HTMLInputElement;
+      if (input.files && input.files[0]) {
+        let file: File = input.files[0];
+        
+        this.xlsxService.parseFile(file).then((list: any) => {
+          console.log(list);
+        });
+      }
+    }
   }
 }
