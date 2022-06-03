@@ -33,9 +33,7 @@ export class BeginnerComponent {
 
   generateLatter(): void {
     console.log(this.data);
-
-    this.data.length = 3;
-
+    this.pdfService.generatePDF('');
     this.data.forEach((item: any) => {
       let text = this.text;
       Object.keys(item).forEach((key: string) => {
