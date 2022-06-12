@@ -1,0 +1,34 @@
+<form [formGroup]="applicationForm" >
+    <div class="input-group mb-3">
+        <span class="input-group-text">Application Date</span>
+        <input type="date" formControlName="date" class="form-control">
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text">Recipient Name</span>
+        <input type="text" formControlName="recipient" class="form-control">
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text">Designation</span>
+        <input type="text" formControlName="recipientDesignation" class="form-control">
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text">Organization Name</span>
+        <input type="text" formControlName="organizationName" class="form-control">
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text">Organization Address</span>
+        <input type="text" formControlName="organizationAddress" class="form-control">
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text">Application Subject</span>
+        <input type="text" formControlName="applicationSubject" class="form-control">
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text">Application Body</span>
+        <textarea type="textarea" formControlName="applicationBody" class="form-control"></textarea>
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text">Sender Name</span>
+        <input type="text" formControlName="sender" class="form-control">
+      </div>
+</form>

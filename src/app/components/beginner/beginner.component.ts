@@ -31,7 +31,7 @@ export class BeginnerComponent {
     }
   }
 
-  generateLatter(): void {
+  generateLetter(): void {
     console.log(this.data);
     this.pdfService.generatePDF('');
     this.data.forEach((item: any) => {
